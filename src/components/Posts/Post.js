@@ -1,0 +1,33 @@
+import React from "react";
+import { useHistory } from "react-router";
+
+function Post({ post, setElement }) {
+  const history = useHistory();
+  return (
+    <div style={{ marginTop: "20vh" }}>
+      <p>Title: {post.title}</p>
+      <p>Author: {post.author}</p>
+      <p>Content: {post.content}</p>
+      <button
+        style={{
+          backgroundColor: "black",
+          height: "40px",
+          width: "150px",
+          fontSize: "20px",
+          color: "aqua",
+          border: "1px solid aqua",
+          borderRadius: "5px",
+          cursor: "pointer",
+        }}
+        onClick={() => {
+          setElement(post);
+          history.push("/editpost");
+        }}
+      >
+        Edit post
+      </button>
+    </div>
+  );
+}
+
+export default Post;

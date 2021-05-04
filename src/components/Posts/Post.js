@@ -5,9 +5,9 @@ function Post({ post, setElement }) {
   const history = useHistory();
   return (
     <div style={{ marginTop: "20vh" }}>
-      <p>Title: {post.title}</p>
-      <p>Author: {post.author}</p>
-      <p>Content: {post.content}</p>
+      <h3>Title: {post.title}</h3>
+      <h3>Author: {post.author}</h3>
+      <h3>Content: {post.content}</h3>
       <button
         style={{
           backgroundColor: "black",

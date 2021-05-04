@@ -11,10 +11,12 @@ function Posts({ setLogin, setUser, setElement, element }) {
 
   const allPost = () => {
     async function fetchData() {
-      await axios.get("http://localhost:3000/api/posts").then((res) => {
-        console.log(res);
-        setPost(res.data);
-      });
+      await axios
+        .get("https://backendpost.herokuapp.com/api/posts")
+        .then((res) => {
+          console.log(res);
+          setPost(res.data);
+        });
     }
     fetchData();
   };
@@ -23,7 +25,7 @@ function Posts({ setLogin, setUser, setElement, element }) {
     console.log(ele);
     async function fetchData() {
       await axios
-        .get(`http://localhost:3000/api/posts/${ele._id}`)
+        .get(`https://backendpost.herokuapp.com/api/posts/${ele._id}`)
         .then((res) => {
           console.log(res);
           setPost(res.data);
@@ -35,7 +37,9 @@ function Posts({ setLogin, setUser, setElement, element }) {
   const searchByTitle = () => {
     async function fetchData() {
       await axios
-        .get(`http://localhost:3000/api/posts/?filterBy=${postTitle}`)
+        .get(
+          `https://backendpost.herokuapp.com/api/posts/?filterBy=${postTitle}`
+        )
         .then((res) => {
           setPost(res.data);
         })
@@ -49,7 +53,7 @@ function Posts({ setLogin, setUser, setElement, element }) {
   const deletePost = (ele) => {
     async function fetchData() {
       await axios
-        .delete(`http://localhost:3000/api/posts/${ele._id}`, {
+        .delete(`https://backendpost.herokuapp.com/api/posts/${ele._id}`, {
           data: {
             header: { "x-auth-token": localStorage.getItem("x-auth-token") },
           },
@@ -98,7 +102,7 @@ function Posts({ setLogin, setUser, setElement, element }) {
         style={{
           backgroundColor: "black",
           height: "40px",
-          width: "200px",
+          width: "150px",
           fontSize: "20px",
           color: "aqua",
           border: "1px solid aqua",
@@ -130,12 +134,11 @@ function Posts({ setLogin, setUser, setElement, element }) {
       <br />
       <br />
       <br />
-      <br />
       {post &&
         (post.map ? (
           <div>
-            {post.map((ele) => (
-              <h3>
+            {post.map((ele, i) => (
+              <h3 key={i} style={{ border: "2px solid white" }}>
                 title: {ele.title}&nbsp;&nbsp;&nbsp; author: {ele.author}
                 &nbsp;&nbsp;&nbsp;
                 {ele.content && `Content : ${ele.content}`}&nbsp;&nbsp;&nbsp;

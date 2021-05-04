@@ -14,7 +14,7 @@ function AdminSignup({ isLogin, setLogin, setUser }) {
     e.preventDefault();
     async function fetchData() {
       await axios
-        .post("http://localhost:3000/api/users", {
+        .post("https://backendpost.herokuapp.com/api/users", {
           name: name,
           email: email,
           password: password,

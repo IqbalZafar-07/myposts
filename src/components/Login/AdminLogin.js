@@ -1,13 +1,34 @@
 import React, { useState } from "react";
 import { useHistory, Link } from "react-router-dom";
+import axios from "axios";
 
 function AdminLogin({ isLogin, setLogin, setUser }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const history = useHistory();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setError("");
+    e.preventDefault();
+    async function fetchData() {
+      await axios
+        .post("https://backendpost.herokuapp.com/api/auth", {
+          email: email,
+          password: password,
+        })
+        .then((res) => {
+          localStorage.setItem("x-auth-token", res.data.token);
+          setUser(res.data);
+          setLogin(true);
+          history.replace("/posts");
+        })
+        .catch((error) => {
+          setError(error.response.data);
+        });
+    }
+    fetchData();
   };
   return !isLogin ? (
     <div>
@@ -15,6 +36,7 @@ function AdminLogin({ isLogin, setLogin, setUser }) {
         <h1>Back to HomePage</h1>
       </Link>
       <p>Login as admin</p>
+      {error && <p style={{ color: "red" }}>{error}</p>}
       <form onSubmit={handleSubmit}>
         <label>Email: </label>
         <input

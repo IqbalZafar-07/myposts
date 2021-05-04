@@ -13,7 +13,7 @@ function EditPost({ element, setElement }) {
     e.preventDefault();
     async function fetchData() {
       await axios
-        .put(`http://localhost:3000/api/posts/${element._id}`, {
+        .put(`https://backendpost.herokuapp.com/api/posts/${element._id}`, {
           title: title,
           author: author,
           content: content,

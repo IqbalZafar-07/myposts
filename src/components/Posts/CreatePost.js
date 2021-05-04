@@ -13,7 +13,7 @@ function CreatePost() {
     e.preventDefault();
     async function fetchData() {
       await axios
-        .post("http://localhost:3000/api/posts", {
+        .post("https://backendpost.herokuapp.com/api/posts", {
           title: title,
           author: author,
           content: content,

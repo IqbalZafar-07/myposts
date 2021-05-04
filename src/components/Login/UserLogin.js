@@ -18,7 +18,7 @@ function UserLogin({ isLogin, setLogin, setUser }) {
           password: password,
         })
         .then((res) => {
-          localStorage.setItem("x-auth-token", res.data.token);
+          localStorage.setItem("x-auth-token", res.data);
           setUser(res.data);
           setLogin(true);
           history.replace("/posts");
